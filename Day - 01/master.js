@@ -14,21 +14,7 @@ fs.readFile( 'data.txt', 'utf8', ( err, data ) => {
         line =getNumber( line );
 
          // Get the first number.
-        for ( char of line ) {
-            if ( ! isNaN( parseInt( char ) ) ) {
-                tmp += char;
-                break;
-            }
-        }
-
-        // Get the last number.
-        for ( char of line.split('').reverse() ) {
-            if ( ! isNaN( parseInt( char ) ) ) {
-                tmp += char;
-                break;
-            }
-        }
-
+        tmp = line.charAt( 0 ) + line.charAt( line.length - 1 );
         result += parseInt( tmp );
     } );
 
@@ -37,10 +23,16 @@ fs.readFile( 'data.txt', 'utf8', ( err, data ) => {
 } );
 
 const getNumber = ( line ) => {
+    let markus = '';
     for( let[ key, value ] of Object.entries( matches ) ) {
         line = line.replaceAll( key, value );
     }
-    return line;
+    for( char of line ) {
+        if( ! isNaN( parseInt( char ) ) ) {
+            markus += char;
+        }
+    }
+    return markus;
 }
 
 
